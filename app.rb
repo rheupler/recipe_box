@@ -16,7 +16,18 @@ get '/recipes' do
   erb(:recipes)
 end
 
+post '/recipes' do
+    name = params.fetch('recipe_name')
+    @recipe = Recipe.create({name: name})
+    erb :recipes
+end
+
+get 'recipes/:id' do
+  id = params.fetch('id').to_i
+  @recipe = Recipe.find(id)
+  erb :recipe_detail
+end
+
 get '/recipes/new' do
-  
   erb(:recipe_add)
 end
