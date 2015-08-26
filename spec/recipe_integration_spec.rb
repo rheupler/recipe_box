@@ -29,7 +29,7 @@ describe '/recipe/new', type: :feature do
   it 'adds a recipe to database' do
     visit '/'
     click_link 'Add Recipes'
-    fill_in('recipe_name', :with =>'California Burrito')
+    fill_in('recipe', :with =>'California Burrito')
     click_button('Add Recipe')
     expect(page).to have_content('California Burrito')
   end
