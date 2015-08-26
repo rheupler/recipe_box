@@ -63,6 +63,14 @@ delete '/ingredients/:id/delete' do
 end
 
 
+delete '/recipes/:id/delete' do
+  @recipe = Recipe.find(params.fetch('recipe_id').to_i)
+  recipe = @recipe.recipe_id
+  @recipe.destroy
+  redirect "/recipes/#{recipe}"
+end
+
+
 ##instruction###
 # patch '/recipes/:id/update' do
 #   id = params.fetch("id")
