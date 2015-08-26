@@ -5,7 +5,17 @@ require 'pg'
 require './lib/recipes'
 require './lib/ingredients'
 
-RSPEC.configure do |config|
+
+
+require("bundler/setup")
+Bundler.require(:default, :test)
+
+
+require('capybara/rspec')
+Capybara.app = Sinatra::Application
+require('./app')
+
+RSpec.configure do |config|
   config.after(:each) do
     Recipe.all.each do |recipe|
       recipe.destroy
