@@ -34,3 +34,14 @@ describe '/recipe/new', type: :feature do
     expect(page).to have_content('California Burrito')
   end
 end
+
+describe '/recipe/new/id', type: :feature do
+  it 'shows detail recipe page' do
+    visit '/'
+    click_link 'Add Recipes'
+    fill_in('recipe', :with =>'California Burrito')
+    click_button('Add Recipe')
+    click_link('California Burrito')
+    expect(page).to have_content('Add Ingredients')
+  end
+end

@@ -1,1 +1,34 @@
-<h1> <%= @recipe.name %></h1>
+
+
+<form action="/recipes/<%= @recipes.id %>" method="post">
+  <label for="ingredient_add">Add an ingredient, sucker.</label>
+  <input type="text" name="ingredient" placeholder="Salt">
+  <button type="submit">Add Ingredient</button>
+
+</form>
+<div class= "ingredients">
+  <h2>Ingredients</h2>
+  <ul>
+  <% @ingredient.each do |ingredient| %>
+    <li><%= ingredient.name %><br>
+      <form action="/ingredients/<%= ingredient.id %>/delete" method="post">
+        <input type="hidden" name="_method" value="delete">
+        <input type="hidden" id="ingredient_id" name="ingredient_id" value="<%= ingredient.id %>">
+        <button class="btn btn-danger btn-sm" type="submit">Delete</button>
+      </form>
+    </li>
+    <% end %>
+
+  </ul>
+</div>
+<div class="description">
+
+</div>
+  <textarea class="form-control" rows="3">
+  </textarea>
+  <br>
+<button class="submit">Add instructions
+  <input type="hidden" name="_method" value="patch">
+</button>
+
+<a href="/">Home</a>
