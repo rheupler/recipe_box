@@ -16,3 +16,11 @@ describe '/', type: :feature do
     expect(page).to have_content('Here are your recipes')
   end
 end
+
+describe '/', type: :feature do
+  it 'goes to add recipes page' do
+    visit '/'
+    click_link "Add Recipes"
+    expect(page).to have_content('Add a recipe')
+  end
+end

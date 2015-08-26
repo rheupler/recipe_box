@@ -15,3 +15,8 @@ get '/recipes' do
   @recipes = Recipes.all()
   erb(:recipes)
 end
+
+get '/recipes/new' do
+  
+  erb(:recipe_add)
+end
