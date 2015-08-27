@@ -17,9 +17,18 @@ get '/recipes' do
   erb(:recipes)
 end
 
+patch '/recipes/:id/update' do
+  id = params.fetch('id')
+  @recipe = Recipe.find(id)
+  instructions = params.fetch("instructions", @recipe.instructions)
+  name = params.fetch("recipe_name", @recipe.name)
+  @recipe.update({name: name, instructions: instructions})
+  redirect "/recipes/#{@recipe.id}"
+end
+
 post '/recipes' do
     name = params.fetch('recipe')
-    @recipes = Recipe.create({:name => name})
+    @recipe = Recipe.create({:name => name})
     @recipes = Recipe.all
     erb :recipes
 end
@@ -89,10 +98,10 @@ end
 
 
 #instruction###
-patch '/recipes/:id/update' do
-  id = params.fetch("id")
-  instructions = params.fetch('instructions')
-  @recipe = Recipe.find(params.fetch('id').to_i)
-  @recipe.update({instructions: instructions})
-  redirect "/recipes/#{@recipe.id}"
-end
+# patch '/recipes/:id/update' do
+#   id = params.fetch("id")
+#   instructions = params.fetch('instructions')
+#   @recipe = Recipe.find(params.fetch('id').to_i)
+#   @recipe.update({instructions: instructions})
+#   redirect "/recipes/#{@recipe.id}"
+# end
