@@ -38,8 +38,8 @@ end
 
 get '/recipes/:id' do
   id = params.fetch('id').to_i
-  @recipes = Recipe.find(id)
-  @ingredient = @recipes.ingredients
+  @recipe = Recipe.find(id)
+  @ingredient = @recipe.ingredients
   erb :recipe_detail
 end
 
@@ -71,8 +71,12 @@ delete '/recipes/:id/delete' do
 end
 
 
-##instruction###
-# patch '/recipes/:id/update' do
-#   id = params.fetch("id")
-#   instruction = params.fetch
-# end
+#instruction###
+patch '/recipes/:id/update' do
+  id = params.fetch("id")
+  instructions = params.fetch('instructions')
+  @recipe = Recipe.find(params.fetch('id').to_i)
+  @recipe.update({instructions: instructions})
+  binding.pry
+  redirect "/recipes/#{@recipe.id}"
+end

@@ -1,6 +1,6 @@
 
 
-<form action="/recipes/<%= @recipes.id %>" method="post">
+<form action="/recipes/<%= @recipe.id %>" method="post">
   <label for="ingredient_add">Add an ingredient, sucker.</label>
   <input type="text" name="ingredient" placeholder="Salt">
   <button type="submit">Add Ingredient</button>
@@ -22,14 +22,25 @@
 
   </ul>
 </div>
-<div class="description">
 
-</div>
-  <textarea class="form-control" rows="3">
-  </textarea>
-  <br>
-<button class="submit">Add instructions
+<form action='/recipes/<%= @recipe.id %>/update' method="post">
   <input type="hidden" name="_method" value="patch">
-</button>
+  <label for="instructions">Instructions</label>
+    <input type="text" name="instructions">
+    <button class="submit">Add instructions</button>
+</form>
+
+<div class= "instructions">
+  <h2>Instructions</h2>
+  <% if @recipe.instructions %>
+  <ol>
+    <li><%= @recipe.instructions %><br>
+    </li>
+  </ol>
+  <% else %>
+  <li>No instructions given</li>
+</div>
+<% end %>
+
 
 <a href="/">Home</a>
