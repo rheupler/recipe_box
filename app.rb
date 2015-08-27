@@ -27,9 +27,11 @@ end
 post '/recipes/:id' do
   id = params.fetch('id').to_i
   ingredient = params.fetch('ingredient')
-  @recipes = Recipe.find(id)
-  @ingredient = @recipes.ingredients
-  ingredient = Ingredient.create({name: ingredient, recipe_id: @recipes.id})
+  @recipe = Recipe.find(id)
+  @ingredient = @recipe.ingredients
+  #need to define @categories for recipe_detail.erb page.
+  @categories = Category.all
+  ingredient = Ingredient.create({name: ingredient, recipe_id: @recipe.id})
   erb(:recipe_detail)
 end
 
