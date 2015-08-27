@@ -1,6 +1,7 @@
 require 'sinatra/activerecord'
 require './lib/recipes'
 require './lib/ingredients'
+require './lib/categories'
 require 'sinatra/reloader'
 require 'sinatra'
 require 'pry'
@@ -40,6 +41,7 @@ get '/recipes/:id' do
   id = params.fetch('id').to_i
   @recipe = Recipe.find(id)
   @ingredient = @recipe.ingredients
+  @categories = Category.all()
   erb :recipe_detail
 end
 
@@ -51,6 +53,19 @@ delete '/recipes/:id' do
   @ingredient = Ingredient.all
   @recipe = Recipe.all
   erb(:recipe_detail)
+end
+
+####Categories####
+post ('/tags_add') do
+  tags = params.fetch('category')
+  @category = Category.create({tags: tags})
+  #see if direct to general page will work, try and fix redirect to specific recipe later
+  redirect "/recipes"
+end
+
+get ('/tags_add') do
+  #how do we get recipe id to tags add page?
+  erb(:tags_add)
 end
 
 ####ingredients#####
@@ -77,6 +92,5 @@ patch '/recipes/:id/update' do
   instructions = params.fetch('instructions')
   @recipe = Recipe.find(params.fetch('id').to_i)
   @recipe.update({instructions: instructions})
-  binding.pry
   redirect "/recipes/#{@recipe.id}"
 end

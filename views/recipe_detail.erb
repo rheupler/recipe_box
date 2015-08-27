@@ -23,10 +23,20 @@
   </ul>
 </div>
 
+<% if @category.tags %>
+
+<ul>
+  <% @category.each do |tag| %>
+  <li><% tag.tags %></li>
+
+</ul>
+<% end %>
+<% end %>
+
 <form action='/recipes/<%= @recipe.id %>/update' method="post">
   <input type="hidden" name="_method" value="patch">
   <label for="instructions">Instructions</label>
-    <input type="text" name="instructions">
+    <input type="text" name="instructions" class='form-control'>
     <button class="submit">Add instructions</button>
 </form>
 
@@ -42,5 +52,5 @@
 </div>
 <% end %>
 
-
+<a href="/tags_add">Add tags</a>
 <a href="/">Home</a>
