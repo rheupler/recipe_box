@@ -64,10 +64,10 @@ end
 
 
 delete '/recipes/:id/delete' do
-  @recipe = Recipe.find(params.fetch('recipe_id').to_i)
-  recipe = @recipe.recipe_id
+  @recipe = Recipe.find(params.fetch('id').to_i)
   @recipe.destroy
-  redirect "/recipes/#{recipe}"
+  @recipes = Recipe.all
+  erb :recipes
 end
 
 

@@ -10,6 +10,7 @@
   <h2>Ingredients</h2>
   <ul>
   <% @ingredient.each do |ingredient| %>
+  <a href="/ingredients/<%= ingredient.id %>/delete"></a>
     <li><%= ingredient.name %><br>
       <form action="/ingredients/<%= ingredient.id %>/delete" method="post">
         <input type="hidden" name="_method" value="delete">
