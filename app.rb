@@ -22,7 +22,8 @@ patch '/recipes/:id/update' do
   @recipe = Recipe.find(id)
   instructions = params.fetch("instructions", @recipe.instructions)
   name = params.fetch("recipe_name", @recipe.name)
-  @recipe.update({name: name, instructions: instructions})
+  rating = params.fetch("recipe_rating", @recipe.rating)
+  @recipe.update({name: name, instructions: instructions, rating: rating})
   redirect "/recipes/#{@recipe.id}"
 end
 
@@ -35,12 +36,13 @@ end
 
 post '/recipes/:id' do
   id = params.fetch('id').to_i
-  ingredient = params.fetch('ingredient')
   @recipe = Recipe.find(id)
+  ingredient = params.fetch('ingredient', @recipe.ingredients)
   @ingredient = @recipe.ingredients
+  rating = @recipe.rating
   #need to define @categories for recipe_detail.erb page.
   @categories = Category.all
-  ingredient = Ingredient.create({name: ingredient, recipe_id: @recipe.id})
+  ingredient = Ingredient.create({name: ingredient, recipe_id: @recipe.id,})
   erb(:recipe_detail)
 end
 
@@ -52,7 +54,7 @@ get '/recipes/:id' do
   id = params.fetch('id').to_i
   @recipe = Recipe.find(id)
   @ingredient = @recipe.ingredients
-  @categories = Category.all()
+  @categories = @recipe.categories
   erb :recipe_detail
 end
 

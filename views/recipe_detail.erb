@@ -6,6 +6,27 @@
   <label for="ingredient_add">Add an ingredient, sucker.</label>
   <input type="text" name="ingredient" placeholder="Salt">
   <button type="submit">Add Ingredient</button>
+</form>
+
+  <form action="/recipes/<%= @recipe.id %>/update" method="post">
+    <label for="rating_add">Add a rating.</label>
+    <input type="hidden" name="_method" value="patch">
+    <select id="recipe_rating" name="recipe_rating">
+      <option value="1" > 1 </option>
+      <option value="2" > 2 </option>
+      <option value="3" > 3 </option>
+      <option value="4" > 4 </option>
+      <option value="5" > 5 </option>
+    </select>
+    <button type="submit">Add rating</button>
+
+<div class= "rating">
+  <h2>rating</h2>
+    <h1><%= @recipe.rating %></h1>
+</div>
+
+
+
 
 </form>
 <div class= "ingredients">
@@ -47,11 +68,6 @@
   <% end %>
 </div>
 
-<ul>
-  <% @categories.each do |tag| %>
-  <li><%= tag.tags %></li>
-  <% end %>
-</ul>
 
 
 <a href="/tags_add">Add tags</a>
